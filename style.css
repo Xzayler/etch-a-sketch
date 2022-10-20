@@ -1,0 +1,12 @@
+#grid-container {
+  display: grid;
+  grid-template: repeat(4, 1fr)/repeat(4, 1fr);
+  height: 400px;
+  width: 400px;
+  margin: 0 auto;
+}
+
+#grid-container, .grid-box {
+  border: 1px solid black;
+}
+
