@@ -2,7 +2,7 @@ const gridContainer = document.querySelector(`#grid-container`);
 
 function paintBox(e) {
   let color;
-  if (rainbowButton.checked) {
+  if (rainbowToggle.checked) {
     color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
   } else {
     color = 'red';
@@ -69,5 +69,5 @@ function toggleCheckbox(e) {
   return;
 }
 
-const rainbowButton = document.querySelector('#rainbow-toggle');
-rainbowButton.addEventListener('click', toggleCheckbox)
+const rainbowToggle = document.querySelector('#rainbow-toggle');
+rainbowToggle.addEventListener('click', toggleCheckbox);
