@@ -80,8 +80,18 @@ function resizeGrid() {
   
   gridContainerCSS.style.setProperty('grid-template', `repeat(${sideSize}, 1fr) / repeat(${sideSize}, 1fr)`);
 }
-expandGrid(16);
 
+const checkboxes = document.querySelectorAll('input[type="checkbox"]')
 function toggleCheckbox(e) {
-  return;
+  if (!e.target.checked) {
+    return;
+  }
+  for (let checkbox of checkboxes) {
+    console.log('looped')
+    if (checkbox != e.target) { 
+      checkbox.checked = false;
+    }
+  }
 }
+
+expandGrid(16);
