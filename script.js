@@ -1,11 +1,27 @@
 const gridContainer = document.querySelector(`#grid-container`);
+const stylesheet = document.styleSheets[0];
+let gridContainerCSS;
+for (let i = 0; i < stylesheet.cssRules.length; i++) {
+  if (stylesheet.cssRules[i].selectorText === '#grid-container') {
+    gridContainerCSS = stylesheet.cssRules[i];
+  }
+}
+
+const rainbowToggle = document.querySelector('#rainbow-toggle');
+rainbowToggle.addEventListener('click', toggleCheckbox);
+
+const colorPicker = document.querySelector('#color-toggle');
+colorPicker.addEventListener('click', toggleCheckbox)
+
+const resetButton = document.querySelector('#reset-button')
+resetButton.addEventListener('click', resizeGrid)
 
 function paintBox(e) {
   let color;
   if (rainbowToggle.checked) {
     color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
   } else {
-    color = 'red';
+    color = colorPicker.value;
     console.log(color)
   }
 
@@ -54,20 +70,6 @@ function resizeGrid() {
 }
 expandGrid(16);
 
-const stylesheet = document.styleSheets[0];
-let gridContainerCSS;
-for (let i = 0; i < stylesheet.cssRules.length; i++) {
-  if (stylesheet.cssRules[i].selectorText === '#grid-container') {
-    gridContainerCSS = stylesheet.cssRules[i];
-  }
-}
-
-const resetButton = document.querySelector('#reset-button')
-resetButton.addEventListener('click', resizeGrid)
-
 function toggleCheckbox(e) {
   return;
 }
-
-const rainbowToggle = document.querySelector('#rainbow-toggle');
-rainbowToggle.addEventListener('click', toggleCheckbox);
