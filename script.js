@@ -7,25 +7,37 @@ for (let i = 0; i < stylesheet.cssRules.length; i++) {
   }
 }
 
-const rainbowToggle = document.querySelector('#rainbow-toggle');
-rainbowToggle.addEventListener('click', toggleCheckbox);
-
 const colorPicker = document.querySelector('#color-toggle');
 colorPicker.addEventListener('click', toggleCheckbox)
 
+const rainbowToggle = document.querySelector('#rainbow-toggle');
+rainbowToggle.addEventListener('click', toggleCheckbox);
+
+const darkenToggle = document.querySelector('#darken-toggle');
+darkenToggle.addEventListener('click', toggleCheckbox);
+
 const resetButton = document.querySelector('#reset-button')
-resetButton.addEventListener('click', resizeGrid)
+resetButton.addEventListener('click', resizeGrid);
 
 function paintBox(e) {
   let color;
   if (rainbowToggle.checked) {
-    color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+    color = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+  } else if (darkenToggle.checked) {
+    let prevColor = e.target.style.backgroundColor;
+    if (!prevColor) {
+      prevColor = 'rgb(255,255,255)' //background color
+    }
+    let rgbArray = prevColor.slice(4, -1).split(',');
+    for (let i = 0; i < 3; i++) {
+      rgbArray[i] = Math.max(0, parseInt(rgbArray[i] - 26));
+    }
+    color = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`
   } else {
     color = colorPicker.value;
-    console.log(color)
   }
 
-  e.target.setAttribute('style', `background-color: ${color};`)
+  e.target.style.backgroundColor = color;
 }
 
 function resetGrid() {
