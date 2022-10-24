@@ -1,12 +1,20 @@
 const gridContainer = document.querySelector(`#grid-container`);
 
 function paintBox(e) {
-  e.target.classList.add("painted");
+  let color;
+  if (rainbowButton.checked) {
+    color = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+  } else {
+    color = 'red';
+    console.log(color)
+  }
+
+  e.target.setAttribute('style', `background-color: ${color};`)
 }
 
 function resetGrid() {
   for (const box of gridContainer.children) {
-    box.classList.remove("painted");
+    box.removeAttribute('style');
   }
 }
 
@@ -40,20 +48,26 @@ function resizeGrid() {
     expandGrid(squaresDiff);
   }
 
-  const stylesheet = document.styleSheets[0];
-  let gridContainerRules;
-  
-  for(let i = 0; i < stylesheet.cssRules.length; i++) {
-    if(stylesheet.cssRules[i].selectorText === '#grid-container') {
-      gridContainerRules = stylesheet.cssRules[i];
-    }
-  }
-
   resetGrid();
   
-  gridContainerRules.style.setProperty('grid-template', `repeat(${sideSize}, 1fr) / repeat(${sideSize}, 1fr)`);
+  gridContainerCSS.style.setProperty('grid-template', `repeat(${sideSize}, 1fr) / repeat(${sideSize}, 1fr)`);
 }
 expandGrid(16);
 
+const stylesheet = document.styleSheets[0];
+let gridContainerCSS;
+for (let i = 0; i < stylesheet.cssRules.length; i++) {
+  if (stylesheet.cssRules[i].selectorText === '#grid-container') {
+    gridContainerCSS = stylesheet.cssRules[i];
+  }
+}
+
 const resetButton = document.querySelector('#reset-button')
 resetButton.addEventListener('click', resizeGrid)
+
+function toggleCheckbox(e) {
+  return;
+}
+
+const rainbowButton = document.querySelector('#rainbow-toggle');
+rainbowButton.addEventListener('click', toggleCheckbox)
