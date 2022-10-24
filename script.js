@@ -25,12 +25,12 @@ function shrinkGrid(difference) {
 }
 
 function expandGrid(difference) {
-  let gridBoxes = [];
+  let gridBox;
   for (let i = 0; i < difference; i++) {
-    gridBoxes[i] = document.createElement('div');
-    gridBoxes[i].classList.add("grid-box");
-    gridBoxes[i].addEventListener('mouseenter', paintBox);
-    gridContainer.appendChild(gridBoxes[i]);
+    gridBox = document.createElement('div');
+    gridBox.classList.add("grid-box");
+    gridBox.addEventListener('mouseenter', paintBox);
+    gridContainer.appendChild(gridBox);
   }
 }
 
