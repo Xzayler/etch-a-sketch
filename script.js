@@ -69,14 +69,14 @@ function resizeGrid() {
   }
   if (sideSize ** 2 < gridContainer.children.length) { //if sideSize > current side length
     let squaresDiff = gridContainer.children.length - (sideSize ** 2)
-    shrinkGrid(squaresDiff); 
+    shrinkGrid(squaresDiff);
+    resetGrid();
   }
   else if (sideSize ** 2 > gridContainer.children.length) {
     let squaresDiff = (sideSize ** 2) - gridContainer.children.length;
+    resetGrid();
     expandGrid(squaresDiff);
   }
-
-  resetGrid();
   
   gridContainerCSS.style.setProperty('grid-template', `repeat(${sideSize}, 1fr) / repeat(${sideSize}, 1fr)`);
 }
