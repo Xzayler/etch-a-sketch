@@ -16,8 +16,8 @@ rainbowToggle.addEventListener('click', toggleCheckbox);
 const darkenToggle = document.querySelector('#darken-toggle');
 darkenToggle.addEventListener('click', toggleCheckbox);
 
-const resetButton = document.querySelector('#reset-button')
-resetButton.addEventListener('click', resizeGrid);
+const resizeButton = document.querySelector('#resize-button')
+resizeButton.addEventListener('click', resizeGrid);
 
 function paintBox(e) {
   let color;
@@ -67,7 +67,7 @@ function resizeGrid() {
   if (isNaN(sideSize)) {
     alert("Please give a valid number");
   }
-  if (sideSize ** 2 < gridContainer.children.length) { //if sideSize > current side length
+  if (sideSize ** 2 < gridContainer.children.length) {
     let squaresDiff = gridContainer.children.length - (sideSize ** 2)
     shrinkGrid(squaresDiff);
     resetGrid();
