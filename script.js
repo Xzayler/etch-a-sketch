@@ -7,8 +7,8 @@ for (let i = 0; i < stylesheet.cssRules.length; i++) {
   }
 }
 
-const colorPicker = document.querySelector('#color-toggle');
-colorPicker.addEventListener('click', toggleCheckbox)
+const penPicker = document.querySelector('#pen-picker');
+penPicker.addEventListener('click', toggleCheckbox)
 
 const rainbowToggle = document.querySelector('#rainbow-toggle');
 rainbowToggle.addEventListener('click', toggleCheckbox);
@@ -37,7 +37,7 @@ function paintBox(e) {
     }
     color = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`
   } else {
-    color = colorPicker.value;
+    color = penPicker.value;
   }
 
   e.target.style.backgroundColor = color;
