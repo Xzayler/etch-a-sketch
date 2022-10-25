@@ -4,13 +4,13 @@
   height: 90vh;
   width: 90vh;
   margin: 0 auto;
+  /* border-left: 1px solid black;
+  border-top: 1px solid black; */
 }
 
-.grid-box.painted {
-  background-color: brown;
+.grid-box {
+  box-shadow: 0 0 0 1px black inset;
+  min-width: 10px;
+  min-height: 10px;
+  background-color: rgba(255,255,255,0);
 }
-
-#grid-container, .grid-box {
-  border: 1px solid black;
-}
-
