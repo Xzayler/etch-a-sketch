@@ -19,8 +19,8 @@ darkenToggle.addEventListener('click', toggleCheckbox);
 const resizeButton = document.querySelector('#resize-button')
 resizeButton.addEventListener('click', resizeGrid);
 
-const resetButton = document.querySelector('#reset-button')
-resetButton.addEventListener('click', resetGrid);
+const clearButton = document.querySelector('#clear-button')
+clearButton.addEventListener('click', clearGrid);
 
 function paintBox(e) {
   let color;
@@ -43,7 +43,7 @@ function paintBox(e) {
   e.target.style.backgroundColor = color;
 }
 
-function resetGrid() {
+function clearGrid() {
   for (const box of gridContainer.children) {
     box.removeAttribute('style');
   }
@@ -73,14 +73,14 @@ function resizeGrid() {
   if (sideSize ** 2 < gridContainer.children.length) {
     let squaresDiff = gridContainer.children.length - (sideSize ** 2)
     shrinkGrid(squaresDiff);
-    resetGrid();
+    clearGrid();
   }
   else if (sideSize ** 2 > gridContainer.children.length) {
     let squaresDiff = (sideSize ** 2) - gridContainer.children.length;
-    resetGrid();
+    clearGrid();
     expandGrid(squaresDiff);
   }
-  else {resetGrid()}
+  else {clearGrid()}
   
   gridContainerCSS.style.setProperty('grid-template', `repeat(${sideSize}, 1fr) / repeat(${sideSize}, 1fr)`);
 }
