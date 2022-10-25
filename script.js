@@ -59,8 +59,7 @@ function paintBox(e) {
       }
     }
   } else if(eraserToggle.checked) {
-    color = 'rgba(0,0,0,0)';
-    console.log('erase');
+    e.target.removeAttribute('style')
   } else {
     color = penPicker.value;
   }
