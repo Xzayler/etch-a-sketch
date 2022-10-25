@@ -19,6 +19,9 @@ darkenToggle.addEventListener('click', toggleCheckbox);
 const resizeButton = document.querySelector('#resize-button')
 resizeButton.addEventListener('click', resizeGrid);
 
+const resetButton = document.querySelector('#reset-button')
+resetButton.addEventListener('click', resetGrid);
+
 function paintBox(e) {
   let color;
   if (rainbowToggle.checked) {
