@@ -77,6 +77,7 @@ function resizeGrid() {
     resetGrid();
     expandGrid(squaresDiff);
   }
+  else {resetGrid()}
   
   gridContainerCSS.style.setProperty('grid-template', `repeat(${sideSize}, 1fr) / repeat(${sideSize}, 1fr)`);
 }
