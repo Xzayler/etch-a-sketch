@@ -4,11 +4,14 @@ let gridContainerCSS;
 for (let i = 0; i < stylesheet.cssRules.length; i++) {
   if (stylesheet.cssRules[i].selectorText === '#grid-container') {
     gridContainerCSS = stylesheet.cssRules[i];
+    break;
   }
 }
 
 const penPicker = document.querySelector('#pen-picker');
-penPicker.addEventListener('click', toggleCheckbox)
+
+const backgroundPicker = document.querySelector('#background-picker');
+backgroundPicker.addEventListener('change', changeBackgroundColor)
 
 const rainbowToggle = document.querySelector('#rainbow-toggle');
 rainbowToggle.addEventListener('click', toggleCheckbox);
@@ -22,6 +25,11 @@ resizeButton.addEventListener('click', resizeGrid);
 const clearButton = document.querySelector('#clear-button')
 clearButton.addEventListener('click', clearGrid);
 
+function changeBackgroundColor() {
+  gridContainerCSS.style.setProperty('background-color', `${backgroundPicker.value}`);
+  console.log(backgroundPicker.value)
+}
+
 function paintBox(e) {
   let color;
   if (rainbowToggle.checked) {
@@ -29,13 +37,23 @@ function paintBox(e) {
   } else if (darkenToggle.checked) {
     let prevColor = e.target.style.backgroundColor;
     if (!prevColor) {
-      prevColor = 'rgb(255,255,255)' //background color
+      prevColor = 'rgba(255,255,255,0)'
     }
-    let rgbArray = prevColor.slice(4, -1).split(',');
-    for (let i = 0; i < 3; i++) {
-      rgbArray[i] = Math.max(0, parseInt(rgbArray[i] - 26));
+    console.log('prevColor: ' + prevColor)
+    if (prevColor.substr(0,4) === "rgba") {
+      let rgbArray = prevColor.slice(5, -1).split(',');
+      rgbArray[3] = parseFloat(rgbArray[3].trim()) + 0.1 ;
+      console.log('alpha: ' + rgbArray[3])
+      console.log(typeof(rgbArray[3]))
+      color = `rgba(0,0,0,${rgbArray[3]})`;
+      console.log(color)
+    } else {
+      let rgbArray = prevColor.slice(4, -1).split(',');
+      for (let i = 0; i < 3; i++) {
+        rgbArray[i] = Math.max(0, parseInt(rgbArray[i] - 26));
+        color = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]}, ${rgbArray[3]})`;
+      }
     }
-    color = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]})`
   } else {
     color = penPicker.value;
   }
@@ -91,7 +109,6 @@ function toggleCheckbox(e) {
     return;
   }
   for (let checkbox of checkboxes) {
-    console.log('looped')
     if (checkbox != e.target) { 
       checkbox.checked = false;
     }
