@@ -13,6 +13,9 @@ const penPicker = document.querySelector('#pen-picker');
 const backgroundPicker = document.querySelector('#background-picker');
 backgroundPicker.addEventListener('change', changeBackgroundColor)
 
+const eraserToggle = document.querySelector('#eraser-toggle');
+eraserToggle.addEventListener('click', toggleCheckbox);
+
 const rainbowToggle = document.querySelector('#rainbow-toggle');
 rainbowToggle.addEventListener('click', toggleCheckbox);
 
@@ -32,6 +35,7 @@ function changeBackgroundColor() {
 
 function paintBox(e) {
   let color;
+  console.log(eraserToggle.checked)
   if (rainbowToggle.checked) {
     color = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
   } else if (darkenToggle.checked) {
@@ -54,6 +58,9 @@ function paintBox(e) {
         color = `rgb(${rgbArray[0]}, ${rgbArray[1]}, ${rgbArray[2]}, ${rgbArray[3]})`;
       }
     }
+  } else if(eraserToggle.checked) {
+    color = 'rgba(0,0,0,0)';
+    console.log('erase');
   } else {
     color = penPicker.value;
   }
